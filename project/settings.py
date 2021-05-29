@@ -107,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTH_USER_MODEL = 'users.CustomUser'
 
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
+    'users.backends.CustomBackend'
 ]
 
 LOGIN_REDIRECT_URL = '/'
