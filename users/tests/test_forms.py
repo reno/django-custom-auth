@@ -1,10 +1,10 @@
+from django.contrib.auth import get_user_model
 from django.core import mail
 from django.template.loader import render_to_string
 from django.test import TestCase
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from users.forms import CustomUserCreationForm
-from users.models import CustomUser
 from users.tests.data import user_data, user_form_data
 from users.tokens import email_verification_token
 
@@ -23,7 +23,8 @@ class CustomUserCreationFormTestCase(TestCase):
         self.assertFalse(form.is_valid())
 
     def test_send_confirmation_email(self):
-        user = CustomUser.objects.create_user(**user_data)
+        UserModel = get_user_model()
+        user = UserModel.objects.create_user(**user_data)
         domain = 'test'
         form = CustomUserCreationForm()
         message = render_to_string(

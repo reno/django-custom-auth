@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.core import mail
 from django.test import TestCase
 from django.urls import reverse
@@ -19,14 +20,16 @@ class ViewsTestCase(TestCase):
     def test_user_creation_view_post(self):
         url = reverse('sign_up')
         response = self.client.post(url, data=user_form_data, follow=True)
-        user = CustomUser.objects.get(username=user_form_data['username'])
+        UserModel = get_user_model()
+        user = UserModel.objects.get(username=user_form_data['username'])
         self.assertEqual(response.status_code, 200)
         self.assertTrue(isinstance(user, CustomUser))
         self.assertTemplateUsed('registration/user_creation_done.html')
         self.assertEqual(len(mail.outbox), 1)
 
     def test_email_confirm_view(self):
-        user = CustomUser.objects.create_user(**user_data)
+        UserModel = get_user_model()
+        user = UserModel.objects.create_user(**user_data)
         self.assertFalse(user.is_active)
         uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
         token = email_verification_token.make_token(user)

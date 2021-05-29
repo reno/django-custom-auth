@@ -1,5 +1,5 @@
+from django.contrib.auth import get_user_model
 from django.test import TestCase
-from users.models import CustomUser
 from users.tests.data import user_data
 from users.tokens import email_verification_token
 
@@ -7,7 +7,8 @@ from users.tokens import email_verification_token
 class TokensTestCase(TestCase):
 
     def setUp(self):
-        self.user = CustomUser.objects.create_user(**user_data)
+        UserModel = get_user_model()
+        self.user = UserModel.objects.create_user(**user_data)
         self.token = email_verification_token.make_token(self.user)
 
     def test_encode(self):

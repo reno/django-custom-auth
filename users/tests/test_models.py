@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 from users.models import CustomUser
 from users.tests.data import user_data
@@ -6,7 +7,8 @@ from users.tests.data import user_data
 class CustomUserTestCase(TestCase):
 
     def setUp(self):
-        self.user = CustomUser.objects.create(**user_data)
+        UserModel = get_user_model()
+        self.user = UserModel.objects.create(**user_data)
 
     def test_type(self):
         self.assertTrue(isinstance(self.user, CustomUser))
@@ -24,13 +26,15 @@ class CustomUserTestCase(TestCase):
 class CustomUserManagerTestCase(TestCase):
 
     def test_create_user(self):
-        user = CustomUser.objects.create_user(**user_data)
+        UserModel = get_user_model()
+        user = UserModel.objects.create_user(**user_data)
         self.assertFalse(user.is_active)
         self.assertFalse(user.is_staff)
         self.assertFalse(user.is_superuser)
 
     def test_create_superuser(self):
-        user = CustomUser.objects.create_superuser(**user_data)
+        UserModel = get_user_model()
+        user = UserModel.objects.create_superuser(**user_data)
         self.assertTrue(user.is_active)
         self.assertTrue(user.is_staff)
         self.assertTrue(user.is_superuser)
