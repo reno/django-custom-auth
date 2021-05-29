@@ -41,8 +41,8 @@ class EmailConfirmView(View):
 
     def get(self, request, uidb64, token):
         try:
-            uid = force_text(urlsafe_base64_decode(uidb64))
-            user = CustomUser.objects.get(pk=uid)
+            id = force_text(urlsafe_base64_decode(uidb64))
+            user = CustomUser.objects.get(pk=id)
         except (TypeError, ValueError, OverflowError, ObjectDoesNotExist):
             user = None
         if user is not None and email_verification_token.check_token(user, token):
@@ -51,4 +51,8 @@ class EmailConfirmView(View):
             login(request, user)
             return redirect('index')
         else:
-            return render(request, 'registration/email_confirmation_invalid.html')
+            return render(
+                request,
+                'registration/email_confirmation_invalid.html',
+                status=400
+            )
