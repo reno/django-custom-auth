@@ -19,7 +19,7 @@ class CustomUserCreationForm(UserCreationForm):
         context = {
             'user': user,
             'domain': domain,
-            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            'uidb64': urlsafe_base64_encode(force_bytes(user.pk)),
             'token': email_verification_token.make_token(user),
         }
         message = render_to_string(
