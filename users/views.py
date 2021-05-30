@@ -10,7 +10,7 @@ from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 from users.forms import CustomUserCreationForm
 from users.models import CustomUser
-from users.tokens import email_verification_token
+from users.tokens import email_confirmation_token
 
 
 # Move this view to your core app
@@ -45,7 +45,7 @@ class EmailConfirmView(View):
             user = CustomUser.objects.get(pk=id)
         except (TypeError, ValueError, OverflowError, ObjectDoesNotExist):
             user = None
-        if user is not None and email_verification_token.check_token(user, token):
+        if user is not None and email_confirmation_token.check_token(user, token):
             user.is_active = True
             user.save()
             login(request, user)

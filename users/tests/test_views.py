@@ -6,7 +6,7 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from users.models import CustomUser
 from users.tests.data import user_data, user_form_data
-from users.tokens import email_verification_token
+from users.tokens import email_confirmation_token
 
 
 class ViewsTestCase(TestCase):
@@ -32,7 +32,7 @@ class ViewsTestCase(TestCase):
         user = UserModel.objects.create_user(**user_data)
         self.assertFalse(user.is_active)
         uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
-        token = email_verification_token.make_token(user)
+        token = email_confirmation_token.make_token(user)
         url = reverse('email_confirm', args=[uidb64, token])
         response = self.client.get(url, follow=True)
         self.assertEqual(response.status_code, 200)

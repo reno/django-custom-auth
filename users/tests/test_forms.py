@@ -6,7 +6,7 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from users.forms import CustomUserCreationForm
 from users.tests.data import user_data, user_form_data
-from users.tokens import email_verification_token
+from users.tokens import email_confirmation_token
 
 
 class CustomUserCreationFormTestCase(TestCase):
@@ -32,7 +32,7 @@ class CustomUserCreationFormTestCase(TestCase):
                 'user': user,
                 'domain': domain,
                 'uidb64': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': email_verification_token.make_token(user),
+                'token': email_confirmation_token.make_token(user),
             }
         )
         form.send_confirmation_email(user, domain)
