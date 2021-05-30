@@ -8,7 +8,7 @@ from django.utils.http import urlsafe_base64_decode
 from django.views import View
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
-from users.forms import CustomUserCreationForm
+from users.forms import CustomUserRegistrationForm
 from users.models import CustomUser
 from users.tokens import email_confirmation_token
 
@@ -18,9 +18,9 @@ class IndexView(TemplateView):
     template_name = 'core/index.html'
 
 
-class UserCreationView(FormView):
+class UserRegistrationView(FormView):
     template_name = 'registration/registration_form.html'
-    form_class = CustomUserCreationForm
+    form_class = CustomUserRegistrationForm
     success_url = reverse_lazy('sign_up_done')
 
     def form_valid(self, form):
@@ -33,7 +33,7 @@ class UserCreationView(FormView):
         return super().form_valid(form)
 
 
-class UserCreationDoneView(TemplateView):
+class UserRegistrationDoneView(TemplateView):
     template_name = 'registration/registration_done.html'
 
 
@@ -42,10 +42,11 @@ class EmailConfirmView(View):
     def get(self, request, uidb64, token):
         try:
             id = force_text(urlsafe_base64_decode(uidb64))
-            user = CustomUser.objects.get(pk=id)
+            user = CustomUser.objects.get(id=id)
         except (TypeError, ValueError, OverflowError, ObjectDoesNotExist):
             user = None
-        if user is not None and email_confirmation_token.check_token(user, token):
+
+        if user and email_confirmation_token.check_token(user, token):
             user.is_active = True
             user.save()
             login(request, user)

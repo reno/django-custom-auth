@@ -11,13 +11,13 @@ from users.tokens import email_confirmation_token
 
 class ViewsTestCase(TestCase):
 
-    def test_user_creation_view_get(self):
+    def test_user_registration_view_get(self):
         url = reverse('sign_up')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'registration/registration_form.html')
 
-    def test_user_creation_view_post(self):
+    def test_user_registration_view_post(self):
         url = reverse('sign_up')
         response = self.client.post(url, data=user_form_data, follow=True)
         UserModel = get_user_model()
