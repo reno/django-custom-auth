@@ -23,7 +23,7 @@ class CustomUser(AbstractUser):
     '''Custom user model.
 
     CustomUser inherits the following fields from AbstractUser:
-    username, first_name, last_name, is_staff, is_superuser, date_joined
+    username, first_name, last_name, date_joined, last_login, is_staff, is_superuser
 
     The fields bellow are overwritten to allow login with email
     and email confirmation.
