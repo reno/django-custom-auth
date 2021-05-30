@@ -28,7 +28,7 @@ class CustomUserCreationFormTestCase(TestCase):
         domain = 'test'
         form = CustomUserCreationForm()
         message = render_to_string(
-            'registration/email_confirmation_message.html', {
+            'registration/registration_confirm_email.html', {
                 'user': user,
                 'domain': domain,
                 'uidb64': urlsafe_base64_encode(force_bytes(user.pk)),

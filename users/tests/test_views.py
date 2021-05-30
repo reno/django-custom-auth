@@ -15,7 +15,7 @@ class ViewsTestCase(TestCase):
         url = reverse('sign_up')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'registration/user_creation_form.html')
+        self.assertTemplateUsed(response, 'registration/registration_form.html')
 
     def test_user_creation_view_post(self):
         url = reverse('sign_up')
@@ -24,7 +24,7 @@ class ViewsTestCase(TestCase):
         user = UserModel.objects.get(username=user_form_data['username'])
         self.assertEqual(response.status_code, 200)
         self.assertTrue(isinstance(user, CustomUser))
-        self.assertTemplateUsed('registration/user_creation_done.html')
+        self.assertTemplateUsed('registration/registration_done.html')
         self.assertEqual(len(mail.outbox), 1)
 
     def test_email_confirm_view(self):

@@ -19,7 +19,7 @@ class IndexView(TemplateView):
 
 
 class UserCreationView(FormView):
-    template_name = 'registration/user_creation_form.html'
+    template_name = 'registration/registration_form.html'
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('sign_up_done')
 
@@ -34,7 +34,7 @@ class UserCreationView(FormView):
 
 
 class UserCreationDoneView(TemplateView):
-    template_name = 'registration/user_creation_done.html'
+    template_name = 'registration/registration_done.html'
 
 
 class EmailConfirmView(View):
@@ -53,6 +53,6 @@ class EmailConfirmView(View):
         else:
             return render(
                 request,
-                'registration/email_confirmation_invalid.html',
+                'registration/registration_confirm_invalid.html',
                 status=400
             )

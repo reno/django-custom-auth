@@ -23,6 +23,6 @@ class CustomUserCreationForm(UserCreationForm):
             'token': email_confirmation_token.make_token(user),
         }
         message = render_to_string(
-            'registration/email_confirmation_message.html', context
+            'registration/registration_confirm_email.html', context
         )
         user.email_user(subject, message)
