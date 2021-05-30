@@ -44,4 +44,5 @@ class CustomUser(AbstractUser):
     @property
     @admin.display(description=_('name'))
     def get_full_name(self):
+        '''Overwrites method as property to use in Admin interface.'''
         return f'{self.first_name} {self.last_name}'
