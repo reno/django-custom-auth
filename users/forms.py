@@ -6,9 +6,9 @@ from users.models import CustomUser
 from users.tokens import email_confirmation_token
 
 
-class CustomUserCreationForm(UserCreationForm):
+class CustomUserRegistrationForm(UserCreationForm):
 
-    class Meta(UserCreationForm.Meta):
+    class Meta():
         model = CustomUser
         fields = (
             'email', 'first_name', 'last_name', 'username', 'password1', 'password2'
