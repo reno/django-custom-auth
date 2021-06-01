@@ -7,8 +7,7 @@ Um app reutilizável de autenticação de usuário para Django.
 Este app tem como objetivo fornecer recursos básicos de cadastro e autenticação de usuário, utilizando ao máximo os recursos já inclusos no Django e sem dependências.
 
 
-
-## Motivação
+## 💭 Motivação
 
 - **Django fornece boa parte da funcionalidade necessária para a manutenção de usuários**. A principal funcionalidade ausente, e motivação para este projeto, é a confirmação de email no cadastro de usuários.
 - **Todos os demais recursos inclusos no Django são utilizados no app**: login/logout, mudança e reset de senha com envio de link único por email. Tudo que é necessário é fornecer os templates.
@@ -19,14 +18,11 @@ Este app tem como objetivo fornecer recursos básicos de cadastro e autenticaç�
 
 ## 📌 Requisitos
 - Python 3.6+
-
 - pip
-  
   
 
 ## ⚙️ Tecnologias utilizadas
 - Django 3
-  
   
 
 ## 🚀 Uso
@@ -54,7 +50,6 @@ Execute as migrações do banco de dados:
 Finalmente, execute o servidor de desenvolvimento:
 
 `python manage.py runserver`
-
 
 
 ## 🎯 Testes
