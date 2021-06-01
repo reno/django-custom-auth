@@ -1,6 +1,6 @@
 # django-custom-auth
 
-![](https://img.shields.io/pypi/pyversions/Django) ![](https://img.shields.io/travis/reno/django-custom-auth) ![](https://img.shields.io/coveralls/github/reno/django-custom-auth)
+![](https://img.shields.io/pypi/pyversions/Django) ![Travis (.com)](https://img.shields.io/travis/com/reno/django-custom-auth) ![Coveralls](https://img.shields.io/coveralls/github/reno/django-custom-auth)
 
 Um app reutilizável de autenticação de usuário para Django.
 
